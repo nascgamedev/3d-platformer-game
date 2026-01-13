@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpofg5k71t6ii"]
+
+[ext_resource type="Script" uid="uid://dtt325ncf1nl0" path="res://particulas_dash.gd" id="1_tuifs"]
+[ext_resource type="Texture2D" uid="uid://bwlviw56bnfs4" path="res://Assets/Images/smoke.png" id="2_tuifs"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tuifs"]
+direction = Vector3(0, 2, 1)
+spread = 20.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+anim_speed_min = 2.0
+anim_speed_max = 2.0
+turbulence_noise_scale = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dcwbj"]
+transparency = 1
+blend_mode = 1
+albedo_texture = ExtResource("2_tuifs")
+billboard_mode = 3
+particles_anim_h_frames = 3
+particles_anim_v_frames = 2
+particles_anim_loop = false
+use_z_clip_scale = true
+proximity_fade_distance = 1234.73
+
+[sub_resource type="QuadMesh" id="QuadMesh_v16qw"]
+material = SubResource("StandardMaterial3D_dcwbj")
+size = Vector2(2, 2)
+
+[node name="ParticulasDash" type="Node3D"]
+script = ExtResource("1_tuifs")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_tuifs")
+draw_pass_1 = SubResource("QuadMesh_v16qw")

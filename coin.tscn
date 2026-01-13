@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbxs52if8rhw0"]
+
+[ext_resource type="Script" uid="uid://extt04hpm2ri" path="res://coin.gd" id="1_d5gmh"]
+[ext_resource type="ArrayMesh" uid="uid://c8avsuggympod" path="res://Assets/Models/coin_new.res" id="2_0t63x"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d5gmh"]
+height = 0.15
+radius = 0.3
+
+[sub_resource type="Animation" id="Animation_v7riw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0t63x"]
+resource_name = "bounce"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1, 0), Vector3(0, 0.8, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pdq0q"]
+_data = {
+&"RESET": SubResource("Animation_v7riw"),
+&"bounce": SubResource("Animation_0t63x")
+}
+
+[node name="Coin" type="Area3D"]
+collision_layer = 4
+script = ExtResource("1_d5gmh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.3214225e-08, -0.39009866, 0, -1.3214225e-08, 2.131265e-15, 0.30230623, -0.30230623, 1.7051754e-08, -1.3214225e-08, 0, 0, 0)
+mesh = ExtResource("2_0t63x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_d5gmh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pdq0q")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

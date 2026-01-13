@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://0whfnje7scki"]
+
+[ext_resource type="PackedScene" uid="uid://c7v0uhsnjf5vg" path="res://Assets/Models/hornet.glb" id="1_71vty"]
+
+[node name="Hornet" type="Node3D"]
+
+[node name="hornet" parent="." instance=ExtResource("1_71vty")]
