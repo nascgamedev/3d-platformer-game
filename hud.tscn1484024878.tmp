@@ -1,15 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://tn84iu8qyl2r"]
+[gd_scene load_steps=8 format=3 uid="uid://tn84iu8qyl2r"]
 
 [ext_resource type="Script" uid="uid://41m0t8w1g5xs" path="res://hud.gd" id="1_8sq4i"]
 [ext_resource type="Texture2D" uid="uid://dwrkflso7wwwc" path="res://Assets/Images/hud_coin.png" id="1_37p78"]
 [ext_resource type="FontFile" uid="uid://bv6xr86hkp8nn" path="res://Assets/Fonts/FrancoisOne-Regular.ttf" id="2_64ctp"]
-[ext_resource type="Texture2D" uid="uid://c2y8u8bdwey2h" path="res://Assets/Images/hud_cooldown.png" id="4_1xsix"]
 [ext_resource type="Texture2D" uid="uid://dvwhymclbbhg" path="res://Assets/Images/hud_dash_up.png" id="4_640wx"]
-[ext_resource type="Texture2D" uid="uid://pk4dqy5kw23f" path="res://Assets/Images/TecladoMouse/keyboard_shift.png" id="4_rftc2"]
 [ext_resource type="Texture2D" uid="uid://c3077xeb1dnok" path="res://Assets/Images/hud_dash_cooldown.png" id="5_a2258"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2snw"]
 bg_color = Color(0, 0, 0, 0.3137255)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2258"]
+bg_color = Color(1, 1, 1, 0.3137255)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
@@ -51,40 +56,21 @@ theme_override_fonts/font = ExtResource("2_64ctp")
 theme_override_font_sizes/font_size = 45
 text = "##"
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-offset_left = 8.0
-offset_top = 585.0
-offset_right = 72.0
-offset_bottom = 649.0
-texture = ExtResource("4_rftc2")
-
-[node name="Dash" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_top = -35.0
-offset_right = 40.0
-offset_bottom = 5.0
-
-[node name="Panel2" type="Panel" parent="Dash"]
+[node name="Panel2" type="Panel" parent="."]
 clip_contents = true
-layout_mode = 0
 offset_left = 13.0
 offset_top = 584.0
 offset_right = 66.0
 offset_bottom = 632.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_n2snw")
 
-[node name="HudDashProgresso" type="TextureProgressBar" parent="Dash"]
+[node name="HudDashPanel" type="Panel" parent="Panel2"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 584.0
-offset_right = 66.0
-offset_bottom = 632.0
-fill_mode = 5
-texture_progress = ExtResource("4_1xsix")
+offset_right = 53.0
+offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a2258")
 
-[node name="HudDashUp" type="TextureRect" parent="Dash"]
-layout_mode = 0
+[node name="HudDashUp" type="TextureRect" parent="."]
 offset_left = 20.0
 offset_top = 588.0
 offset_right = 60.0
@@ -92,8 +78,7 @@ offset_bottom = 628.0
 texture = ExtResource("4_640wx")
 expand_mode = 1
 
-[node name="HudDashCooldown" type="TextureRect" parent="Dash"]
-layout_mode = 0
+[node name="HudDashCooldown" type="TextureRect" parent="."]
 offset_left = 20.0
 offset_top = 588.0
 offset_right = 60.0

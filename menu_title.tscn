@@ -61,4 +61,18 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
 text = "PLAY"
 flat = true
 
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 726.0
+offset_top = 405.0
+offset_right = 1108.0
+offset_bottom = 485.0
+theme_override_colors/font_hover_color = Color(1, 0.9843137, 0, 1)
+theme_override_fonts/font = ExtResource("3_k4cr3")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+text = "LEVEL 2"
+flat = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

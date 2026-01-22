@@ -6,12 +6,13 @@ var speed = SPEED_INICIAL
 const JUMP_VELOCITY = 12
 var is_dashing = false
 var can_dash = true
-var recharging = false
+var dash_recharging = false
 
 var xform : Transform3D
 
 @export var sensitivity = 1000
 
+@export var hud : CanvasLayer
 
 func _physics_process(delta: float) -> void:
 	
@@ -33,8 +34,6 @@ func _physics_process(delta: float) -> void:
 	#if Input.is_action_just_pressed("cam_right"):
 	#	$Camera_Controller.rotate_y(deg_to_rad(-30))
 	
-	
-	
 	# Tentativa minha de melhorar a camera
 	#if Input.is_action_pressed("cam_left"):
 	#	$Camera_Controller.rotate_y(deg_to_rad(2))
@@ -50,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		$SoundJump.play()
 		velocity.y = JUMP_VELOCITY
 	
-	recharge_dash()
+	recharging_dash()
 	
 	# Handle dash.
 	if Input.is_action_just_pressed("dash") and can_dash and not is_dashing:
@@ -117,6 +116,7 @@ func bounce():
 func dash():
 	is_dashing = true
 	can_dash = false
+	hud.updateDash(false)
 	
 	var timer1 = get_tree().create_timer(0.15)
 	var dash_tween = create_tween()
@@ -139,10 +139,16 @@ func dash():
 	speed = 5.0
 	is_dashing = false
 
-func recharge_dash():
-	
-	if not can_dash and not recharging and is_on_floor():
-		recharging = true
+func recharging_dash():
+	if not can_dash and not dash_recharging:
+		dash_recharging = true
 		await get_tree().create_timer(1.0).timeout
-		can_dash = true
-		recharging = false
+		while dash_recharging:
+			if is_on_floor():
+				recharge_dash()
+			await get_tree().create_timer(0.2).timeout
+		
+func recharge_dash():
+	hud.updateDash(true)
+	can_dash = true
+	dash_recharging = false

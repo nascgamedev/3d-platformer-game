@@ -36,8 +36,9 @@ transform = Transform3D(-0.15407, -0.972064, 0.177068, 0.983283, -0.168443, -0.0
 [node name="Block4" parent="Blocks" instance=ExtResource("1_3hls8")]
 transform = Transform3D(-0.706482, -0.683495, 0.183624, 0.701047, -0.711419, 0.0491539, 0.0970374, 0.163456, 0.981767, -0.33772, 9.15191, 0)
 
-[node name="Steve" parent="." instance=ExtResource("2_hbghi")]
+[node name="Steve" parent="." node_paths=PackedStringArray("hud") instance=ExtResource("2_hbghi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.661443, 0.92516434)
+hud = NodePath("../HUD")
 
 [node name="Coins" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 3)
